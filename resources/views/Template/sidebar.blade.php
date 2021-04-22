@@ -9,12 +9,14 @@
       <div class="sidebar-brand-text mx-3">Chublife</div>
     </a>
 
+
+@if(auth()->user()->level=="1")
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link"  href="index.html">
+      <a class="nav-link"  href="{{route('beranda')}}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
@@ -82,6 +84,50 @@
               </a>
           </div>
         </div>
+      </li>
+@endif
+
+@if(auth()->user()->level=="2")
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+      <a class="nav-link"  href="{{route('beranda')}}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Interface
+    </div>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+    <i class="fas fa-fw fa-wrench"></i> 
+    <span>Customers</span>
+  </a>
+  <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-blue py-2 collapse-inner rounded">     
+        <a 
+      class="collapse-item text-white " 
+      href="{{route('data-customers')}}"> <i class="fas fa-fw fa-table"></i><span>&nbsp;Data Customers</span></a>
+      <a class="collapse-item text-white "
+       href="{{route('create-customers')}}">
+       <i class="fas fa-fw fa-file-alt"></i>&nbsp;Form Customers
+        </a>
+    </div>
+  </div>
+</li>
+@endif
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('profile')}}"  aria-expanded="false" >
+          <i class="fas fa-fw fa-user"></i> 
+          <span>Profile</span>
+        </a>
       </li>
   
 

@@ -13,22 +13,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', 'BerandaController@index')->name('beranda');
-
-Route::get('/', 'AuthentikasiController@index')->name('login');
-Route::post('login', 'AuthentikasiController@login')->name('login');
 
 
+Route::get('/', 'LoginController@index')->name('login');
+Route::post('/postlogin', 'LoginController@postLogin')->name('postlogin');
+Route::get('/logout', 'LoginController@logout')->name('logout');
+// Route::post('login', 'AuthentikasiController@login')->name('login');
 
-Route::get('/data-pegawai', 'PegawaiController@index')->name('data-pegawai');
-Route::get('/create-pegawai', 'PegawaiController@create')->name('create-pegawai');
-Route::post('/simpan-pegawai', 'PegawaiController@store')->name('simpan-pegawai');
-Route::get('/edit-pegawai/{id}', 'PegawaiController@edit')->name('edit-pegawai');
-Route::get('/delete-pegawai/{id}', 'PegawaiController@destroy')->name('delete-pegawai');
+Route::group(['middleware'=>['auth','ceklevel:1']],function(){
+    Route::get('/data-pegawai', 'PegawaiController@index')->name('data-pegawai');
+    Route::get('/create-pegawai', 'PegawaiController@create')->name('create-pegawai');
+    Route::post('/simpan-pegawai', 'PegawaiController@store')->name('simpan-pegawai');
+    Route::get('/edit-pegawai/{id}', 'PegawaiController@edit')->name('edit-pegawai');
+    Route::get('/delete-pegawai/{id}', 'PegawaiController@destroy')->name('delete-pegawai');
+});
 
-Route::get('/data-customers', 'CustomersController@index')->name('data-customers');
-Route::get('/create-customers', 'CustomersController@create')->name('create-customers');
-Route::post('/save-customers', 'CustomersController@store')->name('save-customers');
+Route::group(['middleware'=>['auth','ceklevel:3']],function(){
+    Route::get('/profile', 'BerandaController@LookProfile')->name('profile');
+});
+
+Route::group(['middleware'=>['auth','ceklevel:1,2']],function(){
+    Route::get('/beranda', 'BerandaController@index')->name('beranda');
+
+    Route::get('/data-customers', 'CustomersController@index')->name('data-customers');
+    Route::get('/create-customers', 'CustomersController@create')->name('create-customers');
+    Route::post('/save-customers', 'CustomersController@store')->name('save-customers');
+});
+
+Route::group(['middleware'=>['auth','ceklevel:1,2,3']],function(){
+    //halaman login 3 level
+    Route::get('/home-employee', 'BerandaController@pageLoginCommonEmployee')->name('home-employee');
+    Route::get('/home-customer', 'BerandaController@pageLoginCustomer')->name('home-customer');
+    Route::get('/profile', 'BerandaController@LookProfile')->name('profile');
+});
+
+
+
+
+
 
 
 // Auth::routes();

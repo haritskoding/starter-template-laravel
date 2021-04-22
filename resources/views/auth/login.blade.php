@@ -15,11 +15,16 @@
         <div class="contentBox">
             <div class="formBox">
                 <h2>Login</h2>
-                <form method="POST" action="{{route('login')}}">
+                @if ($errors->has('name'))
+    <span class="invalid-feedback">
+        <strong>{{ $errors->first('name') }}</strong>
+    </span>
+@endif
+                <form method="POST" action="{{route('postlogin')}}">
                     @csrf
                     <div class="inputBox">
                         <span>Username</span>
-                        <input id="username" name="username" type="text" name="">
+                        <input id="username" name="name" type="text" name="">
                     </div>
                     <div class="inputBox">
                         <span>Password</span>
@@ -37,5 +42,7 @@
             </div>
         </div>
     </section>
+    @include('Template.script')
+    @include('sweetalert::alert')
 </body>
 </html>

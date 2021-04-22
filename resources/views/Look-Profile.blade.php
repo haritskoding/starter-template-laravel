@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 @include('Template.head');
 </head>
 
 <body id="page-top">
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -21,50 +24,13 @@
 
       <!-- Main Content -->
       <div id="content">
-     
-     <div class="card card-info card-outline">
-        <div class="card-header">
-            <div class="card-tools">
-                <a href="{{route('create-customers')}}" class="btn btn-success">Add Customers <i class="fas fa-plus-square"></i></a>
-            </div>
-        </div>
-     </div>
+      
+
+    
 <div class="card-body">
-    <table class="table table-bordered">
-        <tr>
-          <th>No</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>BOD</th>
-            <th>CC Number</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Aksi</th>
-        </tr>
-        @foreach ($cust as $index=>$item)
-        <tr>
-          <th>{{$index+1}}</th>
-          <td>{{$item->name}}</td>
-          <td>{{$item->gender}}</td>
-          <td>{{date('d-m-Y',strtotime($item->bod))}}</td>
-          <td>{{$item->cc}}</td>
-          <td>{{$item->phonenumber}}</td>
-          <td>{{$item->email}}</td>
-          <td>{{$item->address}}</td>
-          <td>
-            <a href="{{url('edit-position',$item->id)}}">
-              <i class="fas fa-edit"></i>
-            </a>
-            |
-            <a href="{{url('delete-position',$item->id)}}">
-              <i class="fas fa-trash-alt" style="color:red"></i>
-            </a>
-          </td>
-      </tr>
-        @endforeach
-    </table>
-      </div>
+
+   
+    @include('Template.Profile.profile')
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -103,6 +69,6 @@
 
   <!-- Bootstrap core JavaScript-->
 @include('Template.script')
-@include('sweetalert::alert')
+
 </body>
 </html>

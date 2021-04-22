@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Customer;
+use Validator;
 
 
 class CustomersController extends Controller
@@ -40,6 +41,21 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'gender' => 'required',
+            'bod' => 'required',
+            'cc' => 'required',
+            'email' => 'required',
+            // 'password' => 'required',
+            'phonenumber' => 'required',
+            'address' => 'required'
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->with('toast_error', 'form must be filled')->withInput();
+        }
+
         Customer::create([
             'name'=>$request->name,
             'gender'=>$request->gender,

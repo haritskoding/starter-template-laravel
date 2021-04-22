@@ -3,3 +3,21 @@ php artisan make:controller PegawaiController -r
 
 
 php artisan migrate:rollback
+
+menggunakan tinker
+        php artisan tinker
+        $user = new \App\User;
+        $user->name="admin";
+        $user->level="1";
+        $user->mail="admin@gmail.com";
+        $user->password=bcrypt('admin');
+        $user->save();
+
+Buat middleware chekc user
+    php artisan make:middleware CekLevel
+    daftarkan di kernel.php
+        protected $routeMiddleware = [
+                ...
+              'ceklevel'=>  \App\Http\Middleware\CekLevel.php::class,
+        ];
+    tambahkan di route:grou

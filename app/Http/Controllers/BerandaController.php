@@ -19,4 +19,21 @@ class BerandaController extends Controller
         return view('beranda',compact('countPeg','countPos','cust'));
     }
 
+    public function pageLoginAdmin(){
+        return view('Page'.'Page-Admin');
+    }
+
+    public function pageLoginCommonEmployee(){
+        return view('Page'.'Page-Employee');
+    }
+
+
+    public function pageLoginCustomer(){
+        return view('Page'.'Page-Customer');
+    }
+
+    public function LookProfile(){
+        return view('Look-Profile');
+    }
+
 }

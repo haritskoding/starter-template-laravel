@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pegawai;
 use App\Position;
+use Validator;
 
 class PegawaiController extends Controller
 {
@@ -41,6 +42,18 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
     //    dd($request->all());
+    $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'dob' => 'required',
+        'email' => 'required',
+        'position' => 'required',
+        'address' => 'required',
+      
+    ]);
+
+    if ($validator->fails()) {
+        return back()->with('toast_error', 'form must be filled')->withInput();
+    }
         
         Pegawai::create([
             'name'=>$request->name,

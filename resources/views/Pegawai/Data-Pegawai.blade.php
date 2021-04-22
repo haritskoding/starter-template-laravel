@@ -46,7 +46,7 @@
         <tr>
           <th>{{$index+1}}</th>
           <td>{{$item->name}}</td>
-          <td>{{$item->dob}}</td>
+          <td>{{date('d-m-Y',strtotime($item->dob))}}</td>
           <td>{{$item->email}}</td>
           <td>{{$item->position}}</td>
           <td>{{$item->address}}</td>
